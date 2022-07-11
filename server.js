@@ -20,6 +20,12 @@ friend = {
         'occupation': 'enterpreneur',
         'interest' : 'software',
         'staus': 'married'
+    },
+    'unknown' : {
+        'name': 'unknown',
+        'occupation' : 'unknown',
+        'interest' : 'unknown',
+        'status' : 'unknown'
     }
 }
 
@@ -31,11 +37,15 @@ app.get('/api/:name',(req,res) => {
     friendName = req.params.name.toLowerCase()
     if (friend[friendName]) {
         res.json(friend[friendName])
-    }})
+    }
+    else{
+        res.json(friend['unknown'])
+    }
+})
    
 
 
 
-app.listen(PORT, ()=>{
+app.listen(process.env.PORT || PORT, ()=>{
     console.log(`You are running on port ${PORT}. Go and catch it!`)
 })
